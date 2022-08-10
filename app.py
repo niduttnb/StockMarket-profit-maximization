@@ -7,6 +7,11 @@ import random
 from greedy import greedy
 from dp import dp
 from brute_force import brute_force
+
+from brute_one import brute_one
+from greedy_one import greedy_one
+from dp_one import dp_one
+
 import statistics
 
 
@@ -22,7 +27,7 @@ a = tod - d
 a = a.date()
 
 stock = st.text_input('Stock name', 'SPY')
-
+transactions = st.selectbox('Please select Number of transaction',('Single', 'Multiple'))
 algo = st.selectbox('Please select what algorithm to be used',('Brute Force', 'Greedy Algorithm', 'Dynamic Programming'))
 
 if algo and stock:
@@ -48,23 +53,41 @@ if algo and stock:
     l = sorted(max_generator())
 
 
-    if algo=='Brute Force':
+    if algo=='Brute Force' and transactions=='Multiple':
         
         batch1_profit = brute_force(batch1)
         batch2_profit =  brute_force(batch2)
         batch3_profit = brute_force(batch3)
         
+    if algo=='Brute Force' and transactions=='Single':
         
-            
-    if algo=='Greedy Algorithm':
+        batch1_profit = brute_one(batch1)
+        batch2_profit =  brute_one(batch2)
+        batch3_profit = brute_one(batch3)
+        l=l[:2]
+
+    if algo=='Greedy Algorithm' and transactions=='Multiple':
         batch1_profit = greedy(batch1)
         batch2_profit =  greedy(batch2)
         batch3_profit = greedy(batch3)
     
-    if algo=='Dynamic Programming':
+    if algo=='Greedy Algorithm' and transactions=='Single':
+        batch1_profit = greedy_one(batch1)
+        batch2_profit =  greedy_one(batch2)
+        batch3_profit = greedy_one(batch3)
+        l=l[:2]
+
+
+    if algo=='Dynamic Programming' and transactions=='Multiple':
         batch1_profit = dp(batch1)
         batch2_profit =  dp(batch2)
         batch3_profit = dp(batch3)
+
+    if algo=='Dynamic Programming' and transactions=='Single':
+        batch1_profit = dp_one(batch1)
+        batch2_profit =  dp_one(batch2)
+        batch3_profit = dp_one(batch3)
+        l=l[:2]
 
     profits = [batch1_profit,batch2_profit,batch3_profit]
         
