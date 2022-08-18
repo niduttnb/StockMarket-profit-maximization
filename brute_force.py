@@ -1,31 +1,20 @@
 def brute_force(prices):
-        pro = dict()
-            
-        while prices[-1] == 0:
-            prices.pop()
+    return calculate(prices, 0)
         
-    
-        def get_Max_Profit(s, sell):
-            if s == len(prices):
-                return 0
-            
-            if sell * s in pro:
-                return pro[sell * s]
-            
-            max_Profit = 0
-            for j in range(s, len(prices)):
-                next = j + 1
-                
-                if sell == -1:
-                    while next < len(prices) and prices[next] <= prices[j]: next += 1
+def calculate(prices, n):
+    if n >= len(prices):
+        return 0
 
-                profit =  get_Max_Profit(next, -1 * sell) +  sell * prices[j]
-                
-                if profit > max_Profit:
-                    max_Profit = profit
-                    
-            pro[sell * s] = max_Profit
-            
-            return max_Profit
-        
-        return get_Max_Profit(0, -1)
+    max_profit = 0
+    for i in range(n, len(prices)):
+        max_value = 0
+        for j in range(i+1, len(prices)):
+            if prices[i] < prices[j]:
+                profit = calculate(prices, j + 1) + prices[j] /
+                         - prices[i]
+                if profit > max_value:
+                    max_value = profit
+        if max_value > max_profit:
+            max_profit = max_value
+
+    return max_profit
