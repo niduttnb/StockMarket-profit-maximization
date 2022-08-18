@@ -1,10 +1,12 @@
 def brute_one(prices):
-  max_value = 0
-  i=len(prices)-1
-
-  while(i>0):     
-      mv=min(prices[i::-1])
-      if max_value<(prices[i]-mv):
-          max_value=prices[i]-mv
-      i-=1
-  return max_value
+    profit = 0
+    i = 0
+    while(i < (len(prices) - 1)):
+        j = i+1
+        while (j < len(prices)):
+            if prices[j] - prices[i] > profit:
+                profit = prices[j] - prices[i]
+            j +=1
+        i +=1
+    
+    return profit
