@@ -1,14 +1,7 @@
 def dp(prices):
-  curr = prices[0]
-  profit = 0
-
-  j = 1
-  while j<len(prices):
-  #for i in range(1, len(prices)):
-    if prices[j]<curr:
-      curr = prices[j]
-      continue
-    profit += prices[j]-curr
-    curr = prices[j]
-    j+=1
-  return profit
+    profit = [0 for i in range(len(prices))]
+    i = 1
+    while (i < len(prices)):
+        profit[i] = profit[i-1] + max(0, prices[i] - prices[i-1])
+        i += 1
+    return profit[len(prices)-1]
